@@ -16,8 +16,13 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard, RolesGuard)
+  //buat role kalau ini harus ditetapin dia role apa aja yang bisa masuk, kalau untuk guest nanti di kosongin aja berarti
+  //ini contoh kalau 2 2 nya bisa masuk tapi guest ga bisa, karena dia ga punya role
+  
+  // @Roles(Role.USER) ini buat user only
+  // @Roles(Role.ADMIN) ini buat admin only
+  @Roles(Role.USER, Role.ADMIN) // ini buat 2 2 nya kalau semua bisa mending gausah dipake
+  @UseGuards(AuthGuard, RolesGuard) //kalau ga dipake hilangin aja roleguard nya atau dia bakal error
   @Get()
   findAll() {
     // const userid = req.user.sub
