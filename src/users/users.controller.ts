@@ -24,9 +24,9 @@ export class UsersController {
   @Roles(Role.USER, Role.ADMIN) // ini buat 2 2 nya kalau semua bisa mending gausah dipake
   @UseGuards(AuthGuard, RolesGuard) //kalau ga dipake hilangin aja roleguard nya atau dia bakal error
   @Get()
-  findAll() {
-    // const userid = req.user.sub
-    // console.log(userid)
+  findAll(@Req() req) {
+    const userid = req.user.sub
+    console.log(userid)// ini buat ngambil data user yang udah kita taro di payload, bisa di cek payload nya di auth service login
     return this.usersService.findAll();
   }
 
